@@ -1,0 +1,423 @@
+===============================================================================================
+
+1.     Write
+a script that takes a number as an argument and displays the square root of that
+number.
+
+#!/bin/bash
+
+sqroot=$1
+result = $(echo"sqrt($sqroot)" | bc)
+echo "The sqroot of the given number is : $result"
+
+==============================================================================================
+2.     Write
+a script that takes two numbers as arguments and displays the sum of both
+numbers.
+#!/bin/bash
+
+num1=$1
+num2=$2
+sum=$(echo $(($num1+$num2)))
+echo "The sum of the two number is : $sum"
+
+=============================================================================================
+3.     Write
+a script that takes a number from the User and displays the multiplication table
+of that number up to 10.
+
+#!/bin/bash
+
+echo "Enter number: "
+read number
+i=1
+while [ $i -le 10 ]
+
+do
+  echo $(($num * $i"))
+i=$((i+1))
+done
+
+=======================================================================================
+
+4.     Write
+a script that prompts a user to input his/her age (number) and display a
+message if he/she is a senior citizen if the age is more than 65 years.
+
+echo " enter your age "
+read age
+if [ $age -gt 65 ]
+
+then
+echo " you are senior citizen "
+
+else
+
+echo " you are not senior citizen "
+
+fi
+
+==========================================================================================
+5.     Write
+a script that takes 2 arguments (paths) and copies the file (argument1) to the
+provided 2nd argument (destination path).
+
+#!/bin/bash
+path1=$1
+path2=$2
+cp $path1 $path2
+
+how to run:
+./script.sh /home/Mujtaba/Desktop/file.txt /home/mujtaba/Documents/
+
+=======================================================================================
+6.     Write
+a script that takes a file path as an argument and it checks if the file exists
+and displays the appropriate message if the file doesn’t exist, then create
+that file and display the message
+
+file=$1
+if [ -f $file  ]
+then 
+
+echo "file exist"
+
+else
+
+touch $file
+
+fi
+
+==============================================================================================
+
+7.     Write
+a script that takes a file path as an argument and checks if the file provided has
+execute permissions and displays the message accordingly if the file has no
+execute permission, then give the file execute permission
+
+file=$1
+if [ -x $file  ]
+then 
+
+echo "file is executable"
+
+else
+
+chmod u+x $file
+
+fi
+=====================================================================================================
+8. Write
+a C/++ program that uses a system call(s) to get the current offset of the file
+and display it on the terminal.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+    int fd = open("myfile.txt", O_RDONLY);
+    off_t cursor_position = lseek(fd, 0, SEEK_CUR);
+    cout << "The current position of the cursor is: " << cursor_position<<endl;
+    close(fd);
+    return 0;
+}
+=======================================================================================================
+9.Write a C/++ program that uses a
+system call(s) to move the current offset to the end of the file.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+    int fd = open("myfile.txt", O_RDONLY);
+    off_t end_cursor = lseek(fd, 0, SEEK_END);
+    cout << "The end position of the cursor is: " <<end_cursor<<endl;
+    close(fd);
+    return 0;
+}
+=====================================================================================================
+
+10.  
+Write a C/++ program that uses a
+system call(s) to find the size of the file using lseek().
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+    int fd = open("myfile.txt", O_RDONLY);
+    off_t end_cursor = lseek(fd, 0, SEEK_END);
+    cout << "The current position of the cursor is: " <<end_cursor<<endl;
+    close(fd);
+    return 0;
+}
+======================================================================================================
+11.Write a C/++ program that uses a
+system call(s) to move the offset to the middle of the file and then read 15
+characters from there.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() { 
+int a=open("myfile.txt",O_RDONLY);
+off_t c=lseek(a,0,SEEK_END);
+off_t d=c/2;
+off_t b=lseek(a,d,SEEK_SET);
+char e[d+1];
+read(a,e,b);
+cout<<e<<endl;
+
+}
+
+=========================================================================================================
+12.Write a C/++ program that uses a
+system call(s) to open a file and displays its File descriptor on the screen.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+int a=open("myfile.txt",O_RDONLY);
+cout<<"The FIle Descriptor is : "<<a<<endl;
+
+}
+
+=========================================================================================================
+13.Write
+a C/C++ program that uses a system call(s) to read first 3 characters from the
+file.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+	int fd=open("myfile.txt", O_RDONLY);
+	
+	char buffer[4];
+	read(fd,buffer,3);
+	cout<<buffer<<endl;
+}
+
+============================================================================================================
+14.Write
+a C/C++ program that uses a system call(s) to write 10 characters to a file.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+        int a= open("myfile.txt",O_RDWR);
+         write(a,"HelloWorld", 10);
+        cout<<"10 characters are written to the file"<<endl;
+}
+
+===========================================================================================================
+15.Write
+a C/C++ program that uses a system call(s) to write 10 characters to the End of
+the file.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+        int a= open("myfile.txt",O_RDWR);
+        off_t b=lseek(a,0,SEEK_END);
+        write(a,"NEWYEARNEW", 10);
+        cout<<"10 characters are written to the file"<<endl;
+}
+
+============================================================================================================
+16.Write a C++ program that opens
+a file in read mode and uses the read () system call to read the first 50
+characters from the file. The program should then display the content read from
+the file.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+        int fd=open("myfile.txt",O_RDONLY);
+        char buffer[51];
+        read(fd,buffer,50);
+        cout<<buffer<<endl;
+
+}
+
+===========================================================================================================
+17.Write
+a C++ program that displays its own Process ID on the terminal.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+  cout<<"The process id of the current process is: "<<
+  getpid()<<endl;
+
+}
+
+=========================================================================================================
+18.Write
+a C++ program that Creates a child process and each process then displays its
+own Process IDs.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+pid_t pid=fork();
+        if(pid==0){
+                cout<<"The process id of child is: "<<getpid()>
+        }
+
+}
+
+======================================================================================================
+19.Write
+a C++ program that creates a child process and then the child process displays
+its own parent process id.
+
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+int main(){
+	pid_t pid=fork();
+	
+	if(pid==0){
+		cout<<"The process id of child is: "<<getpid()<<endl;
+	}
+	else if (pid>0){
+		cout<<"The process id of the parent is: "<<getpid()<<endl;
+	}
+}
+
+====================================================================================================
+20.Write
+a C++ program that creates 2 direct child processes of itself all
+processes should display their process ids and the child process should also
+display its parent process id.
+
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+int main(){
+	pid_t pid1=fork();
+
+	if(pid1==0){
+		cout<<"This child 1 with process id: "<<getpid()<<" and it's parent process id is: "<<getppid()<<endl;
+	}
+	else if(pid1>0){
+		cout<<"This is parent process with process id: "<<getpid()<<endl;
+		pid_t pid2=fork();
+		
+		if(pid2==0){
+			cout<<"This is child 2 with process id: "<<getpid()<<" and it's parent id is: "<<getppid()<<endl;
+		}
+		else{
+			cout<<""<<endl;
+		}
+	}
+}
+
+=======================================================================================
+21.Write
+a C++ program that creates a child process which then creates its own Child
+process. All processes should then display their process IDs and each child
+process should also display their parent process id.
+
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+int main(){
+	pid_t pid1=fork();	
+
+	if(pid1==0){
+		cout<<"This is child of the main parent with process id: "<<getpid()<<" and parent id of this process is: "<<getppid()<<endl;
+		
+		pid_t pid2=fork();
+		
+		if(pid2==0){
+			cout<<"This is child of the child process. It's process id is: "<<getpid()<<" and it's parent process id is: "<<getppid()<<endl;
+		}
+	}
+	else if (pid1>0){
+		cout<<"This is the main parent with process id: "<<getpid()<<endl;
+	}
+}
+
+=====================================================================================================
+22.Write a C++ Program that writes
+the word “PAKISTAN” on the standard output device using a system call.
+
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+int main(){
+	write(1,"Pakistan",8);
+
+}
+
+========================================================================================================
+23.Write a C++ Program that reads
+10 characters from the standard input device.
+
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+
+using namespace std;
+
+int main() {
+	char buffer[11];
+	cout<<"Enter some input in the keyboard and press enter"<<endl;
+	read(0,buffer, 10);
+	cout<<"Value read from the standard input device is: "<<buffer<<endl;
+}
+
+
+
+
+
+
